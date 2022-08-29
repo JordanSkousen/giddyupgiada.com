@@ -1,0 +1,117 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-image: url("./images/horse1.jpg");
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  &.started {
+    animation-name: scroll-bg;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-duration: 300s;
+  }
+}
+
+
+
+.startButton, .giadaButton {
+  background: #10a84f;
+  color: white;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  padding: 15px 30px;
+  font-size: 3em;
+  border-radius: 20px;
+  margin: 20px;
+}
+
+.giadaButton {
+  background-color: rgb(53, 94, 255);
+  z-index: 1;
+  animation-delay: -2s;
+}
+
+.startButton .started, .giadaButton .started {
+  animation-name: color-rot;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-duration: 4s;
+}
+
+.images img, .bokeh div {
+  @for $i from 1 through 25 {
+    &:nth-child(#{$i}) {
+      position: absolute;
+      $size: random(50) + 5px;
+      width: $size;
+      height: $size;
+      top: random(100) * 1%;
+      left: random(100) * 1%;
+      box-shadow: ($size + 10px) 0 (0.2px + random() * 0.5px) currentColor;
+      transform-origin: (random(40) - 20) * 5px (random(40) - 20) * 5px;
+      animation-name: bokeh-rotate;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      animation-duration: 12s + random(30) * 1s;
+    }
+  }
+}
+
+.images img {
+  @for $i from 1 through 25 {
+    &:nth-child(#{$i}) {
+      box-shadow: none;
+      $size: random(50) + 150px;
+      width: $size;
+      height: $size;
+      animation-name: images-waterfall;
+      animation-delay: -10s;
+    }
+  }
+}
+
+.bokeh div {
+  @for $i from 1 through 25 {
+    &:nth-child(#{$i}) {
+      filter: blur(0.5px + random(5px));
+      animation-duration: 2s + random(3) * 1s;
+      border-radius: 50%;
+      color: hsl(random(255), 100%, 50%);
+      opacity: 0.1 + random(4) * 0.15;
+    }
+  }
+}
+
+
+@keyframes bokeh-rotate {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
+}
+
+@keyframes images-waterfall {
+  0% {transform: translateY(-100vh);}
+  100% {transform: translateY(100vh);}
+}
+
+@keyframes color-rot {
+  0% {background-color: hsl(0%, 100%, 50%);}
+  100% {background-color: hsl(100%, 100%, 50%);}
+}
+@keyframes scroll-bg {
+  0% {
+    background-position-x: 0px;
+    background-position-y: 0px;
+  }
+  0% {
+    background-position-x: -5000px;
+    background-position-y: 5000px;
+  }
+}
